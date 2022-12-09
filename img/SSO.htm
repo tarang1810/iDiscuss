@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" /><meta name="author" /><title>
+	:- Single Sign On -:
+</title><meta http-equiv="CACHE-CONTROL" content="NO-CACHE" /><meta http-equiv="CACHE-CONTROL" content="private" /><meta http-equiv="CACHE-CONTROL" content="no-store" /><meta http-equiv="CACHE-CONTROL" content="must-revalidate" /><meta http-equiv="PRAGMA" content="NO-CACHE" /><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
+    <style type="text/css">
+        @import url( Css/bootstrap.min.css );
+    </style>
+    <style type="text/css">
+        #ImgLogo{
+            border-radius: 15px;
+            border: 3px solid #0077c5;
+        }
+
+        .btn-highlight{
+            border-radius: 10px;
+            padding: 5px;
+            border: 0px;
+            background: #0077c5;
+            width: 100% !important;
+        }
+
+        .btn-highlight a{
+            color: #fff700 !important
+        }
+
+    </style>
+	<link rel="stylesheet" href="Css/all.css" type="text/css" />
+
+    <script src="JScript/jquery.min.js" type="text/javascript"></script>
+
+    <script src="JScript/bootstrap.min.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        @import url( Css/admin_login.css );
+    </style>
+    
+    <style type="text/css">
+        #ImgLogo{
+            border-radius: 30px;
+            border: 3px solid #0077c5;
+        }
+    </style>
+
+    
+    
+    
+</head>
+
+<script src="JScript/webtoolkit.sha1.js" type="text/javascript"></script>
+
+<script src="JScript/validations.js" type="text/javascript"></script>
+
+<script language="javascript" type="text/javascript">
+    function Flogin() {
+        if (chkbadchar(document.getElementById('TxtUsername').value) == false) {
+            document.getElementById('TxtUsername').focus();
+            return false;
+        }
+        if (isProperAlNum(document.getElementById('TxtPwd').value) == false) {
+            alert('Minimun length of password should be 8 alphanumeric character and atleast one special character such as !,@,$,%,^,&,(,)');
+            document.getElementById('TxtPwd').focus();
+            return false;
+        }
+        var enc;
+        //enc = Encpt(document.form1.TxtPwd.value);
+        //document.form1.TxtPwd.value = enc;
+        enc = Encpt(document.getElementById('TxtPwd').value);
+        document.getElementById('TxtPwd').value = enc;
+        return true;
+    }
+    function Encpt(s) {
+        s = SHA1(s);
+        var str = "";
+        var n;
+        var TmpS = "";
+        //var rand_no = Math.random();
+        //rand_no = rand_no * 1000;
+        //rand_no = Math.ceil(rand_no);
+        //TmpS=SHA1(rand_no.toString());
+
+        //TmpS = document.form1.st.value;
+        TmpS = document.getElementById('st').value;
+        if (s.length <= TmpS.length) {
+            for (i = 0; i < s.length; i++)
+                str = str + s.charAt(i) + TmpS.charAt(i);
+        }
+        else {
+            for (i = 0; i < TmpS.length; i++)
+                str = str + s.charAt(i) + TmpS.charAt(i);
+        }
+        str = SHA1(str);
+        return str;
+    }
+    function onloadpage() {
+        document.getElementById('form1').setAttribute("autocomplete", "off");
+        document.getElementById('TxtUsername').focus();
+    }
+</script>
+
+<body onload="onloadpage();">
+
+                
+
+
+   <form method="post" action="./SSO.aspx?Rurl=https%3a%2f%2fikhedut.gujarat.gov.in%2fAdmin%2ffrm_Home.aspx" id="form1" autocomplete="off">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="1DDE2FAC" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="nZA9iLKGcYGDJIeunuqC/M0F2WYn4puX0oa5bd1KXAHa475pUestt7nirJmr0KkyeP6TJOF+5RfS+1D2yiumKZ10Fs0n1QFRzqwClDj3evbVhgU8zZRbSXxyLHTpw5cB+frPLbn41earmCCnTDDTXCBX5xgSo0dXYpFFeYF+uG9a72pkhdvf1Icm1aDYjBM2D+Agi3d/gjqC+KM0upKJcG2fgvqVQx6vRO7sIZlo0W5Fi15jvvLAeaPNAGOIOozyqN77TI3MoJGcfSvNNN87dZ6wgYs0VG9aF7xk15WbKFAvuSfGpPiTwvRv9YlYEQLB3qSMRReHcZZuDX5nwYFpjm54huTIp5xSBw94AdzWatxZQ4A7/fjZEFM3dEyP/mRkFDu8Im6V5QhxxlVo" />
+</div>
+    <div id="wrapper" class="container">
+        <div id="header">
+            <div id="mambo" style="z-index: 100">
+                
+                <h3>
+					<!--<img alt="SSO" src="images/header_text.png" />-->
+					
+					
+					<div class="row">
+						<div class="col-md-6">
+							<div style="display: flex; height: 40px; align-items: center;">
+								<i class="fa fa-users-cog"></i> &nbsp;
+								User Administration
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div style="text-align: end;">
+								<img src="Images/nic-logo-login-header.png" alt="" title="" style="height: 40px;" />
+							</div>
+						</div>
+					</div>
+				</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container login-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="login">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-12" style="text-align: center">
+									
+                                    <img id="ImgLogo" class="img-responsive " src="Images\ikhedut.gujarat.gov.in_Admin_frm_Home.jpg" style="width:100%;" />
+                                </div>
+                            </div>
+                            <div class="login-form">
+                                <div class="row">
+                                    <div class="col-xs-12 ">
+										<h2 class="theme-icons" style="font-weight: 700;">Login...</h2>
+										<!--<img alt="Login" src="images/login.gif" class="img-responsive " />-->
+                                        <input name="st" type="hidden" id="st" value="7e3cf0d38af3aac25887a9bdac03cd4c6ed9aec9" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 ">
+                                        <div class="form-block col-xs-12">
+                                            <div class="inputlabel">
+                                                Username
+                                            </div>
+                                            <div>
+                                                <input type="password" id="prevent_autofillus" style="display: none" value="sdf" />
+                                                <input name="TxtUsername" type="text" id="TxtUsername" class="form-control" class="inputbox" AutoComplete="off" />
+                                            </div>
+                                            <div class="inputlabel">
+                                                Password
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 ">
+                                                    <input type="password" id="prevent_autofill" style="display: none" value="sdf" />
+                                                    <input name="TxtPwd" type="password" id="TxtPwd" class="form-control" AutoComplete="off" />
+                                                    
+                                                    <div class="row" style="padding: 5px 0px;">
+                                                        <div class="col-xs-12 col-sm-4">
+                                                            
+                                                            <img src="CaptchaImg.aspx?ewe=7e3cf0d38af3aac25887a9bdac03cd4c6ed9aec9" id="IMGCAP" height="40" width="80" />
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-4">
+                                                            <a id="LnkCpatchaRef" href="javascript:__doPostBack(&#39;LnkCpatchaRef&#39;,&#39;&#39;)"><img src="Images/captcharef.png" id="IMGCAPTCHAREF" /></a>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-8">
+                                                            <span id="Label1" class="Lbl">Enter text as shown </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <input name="TxtCaptcha" type="text" id="TxtCaptcha" class="form-control" class="Txt" AutoComplete="OFF" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <input type="submit" name="CmdLogin" value="Login..." onclick="return Flogin();" id="CmdLogin" class="button form-control" style="width:80px;" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <span id="LblMsg" style="color:#FFDA72;"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <input type="submit" name="CmdPwdChange" value="Change Password" onclick="return Flogin();" id="CmdPwdChange" class="button form-control" style="width:120px;" />
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <input type="submit" name="CmdUserProfile" value="User Profile" onclick="return Flogin();" id="CmdUserProfile" class="button form-control" style="width:90px;" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <input type="submit" name="CmdVMob" value="Change/Verify your Mobile No./eMail" onclick="return Flogin();" id="CmdVMob" class="button form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <input type="submit" name="CmdLAadhar" value="Link your Aadhar number" onclick="return Flogin();" id="CmdLAadhar" class="button form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="login-text">
+                                <div class="theme-icons">
+									<i class="fa fa-user-lock fa-3x" style="padding:20px;"></i>
+                                    <!--<img alt="security" src="images/security.jpg" class="img-responsive " />-->
+                                </div>
+                                <p>
+                                    Welcome to SSO!<br />
+                                    <br />
+                                    <a href="Download/certificate.html" target="_blank">(How to Install Security Certificate)</a><br />
+                                    <br />
+                                    <a href="Download/ssl_certi_upto082016.p7b">Install Security Certificate</a><br />
+                                    <br />
+                                    
+                                </p>
+                                <p>
+                                    Use a valid username and password to gain access.
+                                </p>
+                                <p>
+                                    <button class="btn-highlight"><a id="LnkForPwd" href="javascript:__doPostBack(&#39;LnkForPwd&#39;,&#39;&#39;)">Forgot Password ?</a></button>
+                                    <br />
+                                    <br />
+                                    <button class="btn-highlight"><a id="LnkUnBUser" href="javascript:__doPostBack(&#39;LnkUnBUser&#39;,&#39;&#39;)">Unblock User</a></button>
+                                    <br />
+                                    <br />
+                                    <button class="btn-highlight">
+                                    <a id="LnkNewUser" href="javascript:__doPostBack(&#39;LnkNewUser&#39;,&#39;&#39;)">Request to create new user<br /><font color='#fff'>(For GOVT users only)</font></a>
+                                        <a class="button form-control" target="_blank" style="background: #004572; line-height: 1.75;" href="Download/SSO-online-UserCreation-New.pdf"><i class="fa fa-question" style="margin-right: 5px;"></i>Help</a>
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div id="divNewsTable"><font size='2pt'><table cellspacing='2' id='tblnews' cellpadding='6'><tr><td><img src='Images/expand-arrow.gif'/>&nbsp;<a href='#' style='cursor: hand;' onClick="nw = window.open('DispSign.aspx?er=n5+eS2wPm+hgbESRf+/cpA==&fdg=sdshg', 'nw','toolbar=no,scrollbars=yes, left=0,top=0,width=850px,height=700px, menubar=no, titlebar=no,status=yes, resizable=no, screenX=0, screenY=0');">As per the UIDAI OM regarding implementation of FIR & FMR both in fingerprint based Aadhaar Authentication to be implemented by 30th June 2022, Upgrade RD Service for fingerprint to be provided by Vendor of the Device, (e.g. https://download.mantratecapp.com/forms/downloadfiles for MANTRA device and https://www.acpl.in.net/Rdservice.html for STARTEK device)</a>&nbsp;<img src='Images/new.gif'/></td></tr><tr><td><img src='Images/expand-arrow.gif'/>&nbsp;<a href='#' style='cursor: hand;' onClick="nw=window.open('https://play.google.com/store/apps/details?id=in.nic.gimkerala&hl=en_IN&gl=US', 'nw','toolbar=no,scrollbars=yes, left=0,top=0,width=850px,height=700px, menubar=no, titlebar=no,status=yes, resizable=no, screenX=0, screenY=0');">Use NIC's SANDES messaging mobile app for getting Alert/OTP SMSes related to your login from SSO instantly.  
+Click to get "Android Play Store" or "iOS App Store" links.</a>&nbsp;<img src='Images/new.gif'/></td></tr><tr><td><img src='Images/expand-arrow.gif'/>&nbsp;Please do your mobile number verification by clicking on  VERIFY YOUR MOBILE NUMBER  button in the login screen. (તમારા મોબાઈલ નંબરની ચકાસણી લોગીન સ્ક્રીન પર આવેલ VERIFY YOUR MOBILE NUMBER બટન પર ક્લિક કરીને કરો.)</td></tr><tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr></table></font></div>
+                
+            </div>
+        </div>
+    </div>
+	
+	<div class="container login-content" style="margin-top:20px">
+		<div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 text-center">
+                        <a href="http://india.gov.in" target="_blank">
+                            <img src="Images/DIndia.jpg" name="dindia" id="Img1" height="94px" alt="Digital India" /></a>
+                    </div>
+					<div class="col-xs-12 col-sm-6">
+                        <a href="" id="LRotating1" target="_blank">
+                            <img src="" name="Rotating" id="Rotating1" alt="banner" width="100%" class="img-responsive " /></a>
+                        
+                    </div> 
+                    <div class="col-xs-12 col-sm-3 text-center">
+                        <a href="https://amritmahotsav.nic.in" target="_blank">
+                            <img src="Images/azadikaamrit.jpg" name="amritmahotsav"  height="94px" id="Img2" alt="amritmahotsav" /></a>
+                    </div>
+                                       
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" language="javascript">
+            var ImageArr1 = new Array("Images/dial_gov_in.jpg", "Images/indiagovin-banner1.jpg", "Images/nkn_banner.jpg", "Images/data_gov_in.png", "Images/banner_nadrs1.png", "Images/eTaal.png");
+            var LinkArr1 = new Array("http://dial.gov.in", "http://www.india.gov.in/", "http://www.nkn.in/", "http://data.gov.in", "http://nadrs.gov.in", "http://etaal.gov.in/");
+            var ImageHolder1 = document.getElementById('Rotating1');
+            var LinkHolder1 = document.getElementById('LRotating1');
+            function RotateImages(whichHolder, Start) {
+                var a = eval("ImageArr" + whichHolder);
+                var b = eval("ImageHolder" + whichHolder);
+                var La = eval("LinkArr" + whichHolder);
+                var Lb = eval("LinkHolder" + whichHolder);
+                if (Start >= a.length)
+                    Start = 0;
+                b.src = a[Start];
+                Lb.href = La[Start];
+                window.setTimeout("RotateImages(" + whichHolder + "," + (Start + 1) + ")", 3500);
+            }
+            RotateImages(1, 0);
+        </script>
+	</div>
+	
+    <div class="footer" align="center">
+    </div>
+    </form>
+    <noscript>
+        !Warning! Javascript must be enabled for proper operation of the Administrator
+    </noscript>
+    <!--<script language="javascript" type="text/javascript">
+        vg = window.open("vg.html", "vg", 'height=515, width=725, toolbar=no,scrollbars=no, left=0,top=0, menubar=no, titlebar=no, status=no, resizable=no, screenX=0, screenY=0', '_self');
+	vg.focus();-->
+     </script>
+</body>
+</html>
